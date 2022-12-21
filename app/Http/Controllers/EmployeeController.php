@@ -16,7 +16,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::all();
+        $employees = Employee::paginate(10);
         return view('employee.index',compact('employees'));
     }
 
@@ -49,7 +49,7 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function show(Employee $employee)
+    public function show($lang, Employee $employee)
     {
         return view('employee.show',compact('employee'));
     }
@@ -60,7 +60,7 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function edit(Employee $employee)
+    public function edit($lang, Employee $employee)
     {
         $companies = Company::get(['id','name']);
         return view('employee.edit',compact('companies','employee'));
@@ -73,7 +73,7 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateEmployeeRequest $request, Employee $employee)
+    public function update(UpdateEmployeeRequest $request, $lang, Employee $employee)
     {
         $employee->update($request->all());
         return redirect()->back()->with('message','Employee Updated Successfully');
@@ -85,7 +85,7 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Employee $employee)
+    public function destroy($lang, Employee $employee)
     {
         $employee->delete();
         return redirect()->route('employee.index')->with('errorMessage','Employee Deleted');

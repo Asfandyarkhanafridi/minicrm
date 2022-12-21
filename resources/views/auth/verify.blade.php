@@ -12,7 +12,7 @@
 
         {{ __('Before proceeding, please check your email for a verification link.') }}
         {{ __('If you did not receive the email') }},
-        <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
+        <form class="d-inline" method="POST" action="{{ route('verification.resend', app()->getLocale()) }}">
             @csrf
             <div class="row">
                 <div class="col-12">

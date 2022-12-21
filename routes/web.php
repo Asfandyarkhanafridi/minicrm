@@ -13,18 +13,21 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::redirect('/','/en');
+Route::group(['prefix'=>'{language}'], function (){
+    Route::get('/', function () {
+        return redirect()->route('login',['locale' => 'en']);
+    });
 
-Route::get('/', function () {
-    return redirect()->route('login');
-});
+    Auth::routes();
 
-Auth::routes();
+    Route::middleware('auth')->group(function () {
 
-Route::get('/', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
+            Route::get('/', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
+            Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 
-Route::middleware('auth')->group(function () {
-    Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+            Route::resource('company',\App\Http\Controllers\CompanyController::class);
+            Route::resource('employee',\App\Http\Controllers\EmployeeController::class);
 
-    Route::resource('company',\App\Http\Controllers\CompanyController::class);
-    Route::resource('employee',\App\Http\Controllers\EmployeeController::class);
+    });
 });

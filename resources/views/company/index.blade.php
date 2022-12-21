@@ -5,8 +5,11 @@
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-6">
-                    <h1 class="m-0">{{ __('Companies') }}</h1>
+                <div class="col-10">
+                    <h1 class="m-0">{{ __('menu.companies') }}</h1>
+                </div>
+                <div style="position: absolute; right: 1%">
+                    <a href="{{route('company.create', app()->getLocale())}}" class="btn btn-primary">{{__('menu.createCompany')}}</a>
                 </div>
                 <!-- /.col -->
             </div><!-- /.row -->
@@ -19,7 +22,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="alert alert-info">
-                        Showing Companies
+                        {{__('menu.showingCompanies')}}
                     </div>
                     <div class="card">
                         @include('partials.message')
@@ -27,11 +30,11 @@
                             <table class="table datatable">
                                 <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Website</th>
-                                    <th>Logo</th>
-                                    <th>Action</th>
+                                    <th>{{__('menu.companyName')}}</th>
+                                    <th>{{__('menu.email')}}</th>
+                                    <th>{{__('menu.website')}}</th>
+                                    <th>{{__('menu.logo')}}</th>
+                                    <th>{{__('menu.action')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>

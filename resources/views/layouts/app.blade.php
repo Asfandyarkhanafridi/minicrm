@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Mini-CRM') }}</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -36,30 +36,18 @@
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
         </ul>
-
         <!-- Right navbar links -->
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown">
-                <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
-                    {{ Auth::user()->name }}
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" style="left: inherit; right: 0px;">
-                    <a href="{{ route('profile.show') }}" class="dropdown-item">
-                        <i class="mr-2 fas fa-file"></i>
-                        {{ __('My profile') }}
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <a href="{{ route('logout') }}" class="dropdown-item"
-                           onclick="event.preventDefault(); this.closest('form').submit();">
-                            <i class="mr-2 fas fa-sign-out-alt"></i>
-                            {{ __('Log Out') }}
-                        </a>
-                    </form>
-                </div>
-            </li>
-        </ul>
+        <a href="{{route(Route::currentRouteName(),'en')}}" class="btn btn-sm btn-success ml-auto">English</a>
+        <a href="{{route(Route::currentRouteName(),'urdu')}}" class="btn btn-sm btn-primary ml-2">Urdu</a>
+
+        <form method="POST" action="{{ route('logout', app()->getLocale()) }}" class="ml-2">
+            @csrf
+            <a href="{{ route('logout', app()->getLocale()) }}" class="btn btn-sm btn-outline-danger"
+               onclick="event.preventDefault(); this.closest('form').submit();">
+                <i class="mr-2 fas fa-sign-out-alt"></i>
+                {{__('menu.logout')}}
+            </a>
+        </form>
     </nav>
     <!-- /.navbar -->
 
@@ -70,7 +58,7 @@
             <img src="{{ asset('images/AdminLTELogo.png') }}" alt="AdminLTE Logo"
                  class="brand-image img-circle elevation-3"
                  style="opacity: .8">
-            <span class="brand-text font-weight-light">AdminLTE 3</span>
+            <span class="brand-text font-weight-light">Mini-CRM</span>
         </a>
 
         @include('layouts.navigation')
@@ -94,12 +82,8 @@
 
     <!-- Main Footer -->
     <footer class="main-footer">
-        <!-- To the right -->
-        <div class="float-right d-none d-sm-inline">
-            Anything you want
-        </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+        <strong>{{__('menu.copyright')}} &copy; 2022 <a href="https://github.com/Asfandyarkhanafridi">Asfandyarkhanafridi-Github</a>.</strong>
     </footer>
 </div>
 <!-- ./wrapper -->

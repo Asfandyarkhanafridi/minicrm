@@ -20,7 +20,7 @@
                 <div class="col-lg-6">
                     <div class="card">
 
-                        <form action="{{ route('profile.update') }}" method="POST">
+                        <form action="{{ route('profile.update', app()->getLocale()) }}" method="POST">
                             @csrf
                             @method('PUT')
 

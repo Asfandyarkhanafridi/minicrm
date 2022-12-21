@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
+use Illuminate\Support\Facades\Mail;
+use function Illuminate\Mail\Mailables\subject;
 
 class CompanyController extends Controller
 {
@@ -46,6 +48,10 @@ class CompanyController extends Controller
         }
         $company->save();
 
+        Mail::send('emails.companyRegistered',$company->toArray(),function ($message){
+            $message->to('masfandy9@gmail.com', 'Asfand Afridi')->subject('Company Registered');
+        });
+
         return redirect()->back()->with('message','Company Added Successfully');
     }
 
@@ -55,8 +61,9 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function show(Company $company)
+    public function show($request , Company $company)
     {
+
         return view('company.show',compact('company'));
     }
 
@@ -66,7 +73,7 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function edit(Company $company)
+    public function edit($request, Company $company)
     {
         return view('company.edit',compact('company'));
     }
@@ -78,7 +85,7 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCompanyRequest $request, Company $company)
+    public function update(UpdateCompanyRequest $request, $lang, Company $company)
     {
         $company->update($request->all());
 
@@ -99,9 +106,10 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Company $company)
+    public function destroy($request, Company $company)
     {
+        $company->employees()->delete();
         $company->delete();
-        return redirect()->route('company.index')->with('errorMessage','Company Deleted');
+        return redirect()->route('company.index', app()->getLocale())->with('errorMessage','Company Deleted');
     }
 }

@@ -12,7 +12,7 @@ class ProfileController extends Controller
         return view('auth.profile');
     }
 
-    public function update(ProfileUpdateRequest $request)
+    public function update(ProfileUpdateRequest $request ,$lang)
     {
         if ($request->password) {
             auth()->user()->update(['password' => Hash::make($request->password)]);

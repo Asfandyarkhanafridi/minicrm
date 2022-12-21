@@ -3,7 +3,7 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="info">
-            <a href="{{ route('profile.show') }}" class="d-block">{{ Auth::user()->name }}</a>
+            <a href="{{ route('profile.show', app()->getLocale()) }}" class="d-block">{{ Auth::user()->name }}</a>
         </div>
     </div>
 
@@ -15,21 +15,21 @@
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-building nav-icon"></i>
                     <p>
-                        Companies
+                        {{__('menu.companies')}}
                         <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
                 <ul class="nav nav-treeview" style="display: none;">
                     <li class="nav-item">
-                        <a href="{{route('company.index')}}" class="nav-link">
+                        <a href="{{route('company.index', app()->getLocale())}}" class="nav-link">
                             <i class="far fas fa-list nav-icon"></i>
-                            <p>List</p>
+                            <p>{{__('menu.list')}}</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('company.create')}}" class="nav-link">
+                        <a href="{{route('company.create', app()->getLocale())}}" class="nav-link">
                             <i class="far fas fa-plus nav-icon"></i>
-                            <p>Create</p>
+                            <p>{{__('menu.create')}}</p>
                         </a>
                     </li>
                 </ul>
@@ -38,21 +38,21 @@
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-users nav-icon"></i>
                     <p>
-                        Employees
+                        {{__('menu.employees')}}
                         <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
                 <ul class="nav nav-treeview" style="display: none;">
                     <li class="nav-item">
-                        <a href="{{route('employee.index')}}" class="nav-link">
+                        <a href="{{route('employee.index', app()->getLocale())}}" class="nav-link">
                             <i class="far fas fa-list nav-icon"></i>
-                            <p>List</p>
+                            <p>{{__('menu.list')}}</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('employee.create')}}" class="nav-link">
+                        <a href="{{route('employee.create', app()->getLocale())}}" class="nav-link">
                             <i class="far fas fa-plus nav-icon"></i>
-                            <p>Create</p>
+                            <p>{{__('menu.create')}}</p>
                         </a>
                     </li>
                 </ul>

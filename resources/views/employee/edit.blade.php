@@ -1,66 +1,76 @@
-@extends('layouts.nav')
-@section('title', 'Company Edit')
-@section('app-content', 'app-content')
-
-@section('main-content')
-    <div class="container content-area">
-        <div class="sideapp">
-            <!-- page-header -->
-            <div class="page-header mt-0 mb-0">
-                <ol class="breadcrumb"><!-- breadcrumb -->
-                    <li class="breadcrumb-item"><a href="{{route('company.index')}}">Company List</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ __('Edit Company') }}</li>
-                </ol><!-- End breadcrumb -->
-            </div>
-            <!-- End page-header -->
+@extends('layouts.app')
+@section('content')
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">{{ __('Employees') }}</h1>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <div class="content">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-lg-12">
                     <div class="card">
                         @include('partials.message')
-                        <div class="card-header">
-                            <h3 class="mb-0 card-title">{{ __('Edit Company') }}</h3>
-                        </div>
                         <div class="card-body">
-                            <form method="POST" action="{{route('company.update',$company->id)}}">
-                                @method('PUT')
+                            <form action="{{route('employee.update',$employee->id)}}" method="POST" enctype="multipart/form-data">
                                 @csrf
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label class="form-label required">Company Name</label>
-                                            <input type="text" class="form-control" name="companyName" placeholder="Enter Company Name" value="{{$company->companyName}}">
-                                            @if($errors->has('companyName'))
-                                                <div class="text-danger">
-                                                    {{ $errors->first('companyName') }}
-                                                </div>
-                                            @endif
+                                @method('PUT')
+                                <div class="form-group">
+                                    <label class="required" for="name">First Name</label>
+                                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter First Name" value="{{$employee->firstName}}">
+                                    @if($errors->has('firstName'))
+                                        <div class="text-danger">
+                                            {{ $errors->first('firstName') }}
                                         </div>
-                                        <div class="form-group">
-                                            <label class="form-label required">Contact Person</label>
-                                            <input type="text" class="form-control" name="contactPerson" placeholder="Enter Contact Person" value="{{$company->contactPerson}}">
-                                            @if($errors->has('contactPerson'))
-                                                <div class="text-danger">
-                                                    {{ $errors->first('contactPerson') }}
-                                                </div>
-                                            @endif
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="form-label">Company Address</label>
-                                            <input type="text" class="form-control" name="address" placeholder="Enter Company Address" value="{{$company->address}}">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="form-label">Company Phone</label>
-                                            <input type="text" class="form-control" name="phone" placeholder="Enter Company Phone" value="{{$company->phone}}">
-                                        </div>
-                                    </div>
+                                    @endif
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                                <a href="{{route('company.index')}}" type="button" class="btn btn-secondary">Back</a>
+                                <div class="form-group">
+                                    <label class="required" for="name">First Name</label>
+                                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter First Name" value="{{$employee->lastName}}">
+                                    @if($errors->has('lastName'))
+                                        <div class="text-danger">
+                                            {{ $errors->first('lastName') }}
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label required">Select Company Name</label>
+                                    <select class="form-select" name="company_id" style="width: 100%; height: 40px">
+                                        <option selected disabled>Select Company</option>
+                                        @foreach($companies as $company)
+                                            <option value="{{$company->id}}" @if($employee->company_id == $company->id) selected @endif> {{$company->name}} </option>
+                                        @endforeach
+                                    </select>
+                                    @if($errors->has('company_id'))
+                                        <div class="text-danger">
+                                            {{ $errors->first('company_id') }}
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email address</label>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" value="{{$employee->email}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone</label>
+                                    <input type="number" class="form-control" id="phone" name="phone" placeholder="Enter Phone" value="{{$employee->phone}}">
+                                </div>
+                                <a href="{{route('employee.index')}}" class="btn btn-secondary" type="button">Back</a>
+                                <input class="btn btn-primary" type="submit" value="Save">
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
     </div>
+    <!-- /.content -->
 @endsection

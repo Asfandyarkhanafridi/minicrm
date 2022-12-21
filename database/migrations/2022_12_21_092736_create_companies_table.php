@@ -17,11 +17,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email');
-            $table->string('logo');
+            $table->string('logo',255)->nullable();
             $table->string('website');
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

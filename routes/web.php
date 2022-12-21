@@ -20,7 +20,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
+
 Route::middleware('auth')->group(function () {
+    Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+
     Route::resource('company',\App\Http\Controllers\CompanyController::class);
     Route::resource('employee',\App\Http\Controllers\EmployeeController::class);
 });

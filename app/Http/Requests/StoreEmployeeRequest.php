@@ -6,25 +6,26 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreEmployeeRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, mixed>
-     */
     public function rules()
     {
         return [
-            //
+            'firstName' => 'required|string',
+            'lastName' => 'required|string',
+            'company_id' => 'required|string'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'firstName.required' => 'Employee First Name is required!',
+            'lastName.required' => 'Employee Last Name is required!',
+            'company_id.required' => 'Company  is required!'
         ];
     }
 }

@@ -1,49 +1,52 @@
-@extends('layouts.nav')
-@section('title', 'Company Show')
-@section('app-content', 'app-content')
-
-@section('main-content')
-<div class="container content-area">
-    <div class="sideapp">
-        <!-- page-header -->
-        <div class="page-header mt-0 mb-0">
-            <ol class="breadcrumb"><!-- breadcrumb -->
-                <li class="breadcrumb-item"><a href="{{route('company.index')}}">Company List</a></li>
-                <li class="breadcrumb-item active" aria-current="page">{{ __('Company Show') }}</li>
-            </ol><!-- End breadcrumb -->
-        </div>
-        <!-- End page-header -->
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="mb-0 card-title">{{ __('Company Details') }}</h3>
-                        <a href="{{route('company.edit',$company->id)}}" class="btn btn-primary ml-auto">Edit
-                            Company</a>
+@extends('layouts.app')
+@section('content')
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">{{ __('Employee') }}</h1>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="alert alert-info">
+                        Showing Employee {{$employee->name}}
                     </div>
-                    <div class="card-body">
-                        <table class="table row table-borderless w-100 m-0 border">
-                            <tbody class="col-lg-6 p-0">
-                            <tr>
-                                <td><strong>Company Name :</strong> {{$company?->companyName}}</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Address :</strong> {{$company?->address}}</td>
-                            </tr>
-                            </tbody>
-                            <tbody class="col-lg-6 p-0">
-                            <tr>
-                                <td><strong>Contact Person :</strong> {{$company?->contactPerson}}</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Phone :</strong> {{$company?->phone}}</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table row table-borderless w-100 m-0 border">
+                                <tbody class="col-lg-6 p-0">
+                                <tr>
+                                    <td><strong>First Name :</strong> {{$employee->firstName}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Last Name :</strong> {{$employee->lastName}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Company Name :</strong> {{$employee->company->name}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Email :</strong> {{$employee->email}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Phone :</strong> {{$employee->phone}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <a href="{{route('employee.edit',$employee->id)}}" type="button" class="btn btn-secondary mt-2">Edit</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
     </div>
-</div>
+    <!-- /.content -->
 @endsection

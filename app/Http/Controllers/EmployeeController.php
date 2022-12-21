@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use App\Models\Employee;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
@@ -15,7 +16,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        $employees = Employee::all();
+        return view('employee.index',compact('employees'));
     }
 
     /**
@@ -25,7 +27,8 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        $companies = Company::get(['id','name']);
+        return view('employee.create',compact('companies'));
     }
 
     /**
@@ -36,7 +39,8 @@ class EmployeeController extends Controller
      */
     public function store(StoreEmployeeRequest $request)
     {
-        //
+        Employee::create($request->all());
+        return redirect()->back()->with('message','Company Added Successfully');
     }
 
     /**
@@ -47,7 +51,7 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee)
     {
-        //
+        return view('employee.show',compact('employee'));
     }
 
     /**
@@ -58,7 +62,8 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        //
+        $companies = Company::get(['id','name']);
+        return view('employee.edit',compact('companies','employee'));
     }
 
     /**
@@ -70,7 +75,8 @@ class EmployeeController extends Controller
      */
     public function update(UpdateEmployeeRequest $request, Employee $employee)
     {
-        //
+        $employee->update($request->all());
+        return redirect()->back()->with('message','Employee Updated Successfully');
     }
 
     /**
@@ -81,6 +87,7 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
-        //
+        $employee->delete();
+        return redirect()->route('employee.index')->with('errorMessage','Employee Deleted');
     }
 }

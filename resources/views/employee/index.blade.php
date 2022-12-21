@@ -1,57 +1,65 @@
-@extends('layouts.nav')
-@section('title', 'Company List')
-@section('app-content', 'app-content')
+@extends('layouts.app')
 
-@section('main-content')
-    <div class="container content-area">
-        <div class="sideapp">
-            <!-- End page-header -->
+@section('content')
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">{{ __('Companies') }}</h1>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <div class="content">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-lg-12">
+                    <div class="alert alert-info">
+                        Showing Companies
+                    </div>
                     <div class="card">
                         @include('partials.message')
-                        <div class="card-header">
-                            <h3 class="mb-0 card-title">{{ __('Company List') }}</h3>
-                            <a href="{{route('company.create')}}" class="btn btn-primary ml-auto">Add Company</a>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered text-nowrap w-100 display">
-                                    <thead>
+                        <div class="card-body p-0 table-responsive">
+                            <table class="table datatable">
+                                <thead>
+                                <tr>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Company</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($employees as $employee)
                                     <tr>
-                                        <th class="wd-15p">SrNo.</th>
-                                        <th class="wd-25p">Company Name</th>
-                                        <th class="wd-15p">Contact Person</th>
-                                        <th class="wd-15p">Address</th>
-                                        <th class="wd-25p">Phone</th>
-                                        <th class="wd-25p notExport" style="width: 2%; !important;">Actions</th>
+                                        <td>{{ $employee->firstName }}</td>
+                                        <td>{{ $employee->lastName }}</td>
+                                        <td>{{ $employee->company->name }}</td>
+                                        <td>{{ $employee->email }}</td>
+                                        <td>{{ $employee->phone }}</td>
+                                        @php
+                                            $crud = 'employee';
+                                            $row = $employee->id;
+                                        @endphp
+                                        <td>
+                                            @include('partials.actions')
+                                        </td>
                                     </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($companies as $company)
-                                        <tr>
-                                            <td>{{$loop?->iteration}}</td>
-                                            <td>{{$company?->companyName}}</td>
-                                            <td>{{$company?->contactPerson}}</td>
-                                            <td>{{$company?->address}}</td>
-                                            <td>{{$company?->phone}}</td>
-                                            <td>
-                                                @php
-                                                    $crud = 'company';
-                                                    $row = $company->id;
-                                                @endphp
-                                                @include('partials.actions')
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- table-wrapper -->
+                                @endforeach
+                                </tbody>
+                            </table>
                         </div>
+                        <!-- /.card-body -->
                     </div>
                 </div>
             </div>
-        </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
     </div>
+    <!-- /.content -->
 @endsection

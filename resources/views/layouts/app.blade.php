@@ -12,6 +12,17 @@
     <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
+
+    <!-- Data table css -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+
+    <style>
+        .required:after{
+            content:'*';
+            color:red;
+            padding-left:5px;
+        }
+    </style>
     @yield('styles')
 </head>
 <body class="hold-transition sidebar-mini">
@@ -95,9 +106,23 @@
 
 <!-- REQUIRED SCRIPTS -->
 
-@vite('resources/js/app.js')
+{{--@vite('resources/js/app.js')--}}
 <!-- AdminLTE App -->
 <script src="{{ asset('js/adminlte.min.js') }}" defer></script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(function () {
+        $(document).ready(function () {
+            $('table.datatable').DataTable({
+                bPaginate:false,
+            });
+        });
+    });
+</script>
 
 @yield('scripts')
 </body>

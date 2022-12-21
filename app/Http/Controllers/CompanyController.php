@@ -15,7 +15,8 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        return view('company.index');
+        $companies = Company::paginate(10);
+        return view('company.index',compact('companies'));
     }
 
     /**
@@ -25,7 +26,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
+        return view('company.create');
     }
 
     /**
@@ -36,7 +37,16 @@ class CompanyController extends Controller
      */
     public function store(StoreCompanyRequest $request)
     {
-        //
+        $company =  Company::create($request->all());
+        if($request->hasFile('logo')){
+            $logo = $request->file('logo');
+            $filename = time(). '.' .$logo->getClientOriginalExtension();
+            $request->file('logo')->storeAs('public' , $filename);
+            $company->logo = $filename;
+        }
+        $company->save();
+
+        return redirect()->back()->with('message','Company Added Successfully');
     }
 
     /**
@@ -47,7 +57,7 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        //
+        return view('company.show',compact('company'));
     }
 
     /**
@@ -58,7 +68,7 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        //
+        return view('company.edit',compact('company'));
     }
 
     /**
@@ -70,7 +80,17 @@ class CompanyController extends Controller
      */
     public function update(UpdateCompanyRequest $request, Company $company)
     {
-        //
+        $company->update($request->all());
+
+        if($request->hasFile('logo')){
+            $logo = $request->file('logo');
+            $filename = time(). '.' .$logo->getClientOriginalExtension();
+            $request->file('logo')->storeAs('public' , $filename);
+            $company->logo = $filename;
+        }
+        $company->save();
+
+        return redirect()->back()->with('message','Company Updated Successfully');
     }
 
     /**
@@ -81,6 +101,7 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        //
+        $company->delete();
+        return redirect()->route('company.index')->with('errorMessage','Company Deleted');
     }
 }

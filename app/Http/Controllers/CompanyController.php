@@ -6,6 +6,7 @@ use App\Models\Company;
 use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
 use Illuminate\Support\Facades\Mail;
+
 use function Illuminate\Mail\Mailables\subject;
 
 class CompanyController extends Controller
@@ -61,9 +62,8 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function show($request , Company $company)
+    public function show($language, Company $company)
     {
-
         return view('company.show',compact('company'));
     }
 
@@ -73,7 +73,7 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function edit($request, Company $company)
+    public function edit($language, Company $company)
     {
         return view('company.edit',compact('company'));
     }
@@ -85,7 +85,7 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCompanyRequest $request, $lang, Company $company)
+    public function update(UpdateCompanyRequest $request, $language, Company $company)
     {
         $company->update($request->all());
 
@@ -106,7 +106,7 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function destroy($request, Company $company)
+    public function destroy($language, Company $company)
     {
         $company->employees()->delete();
         $company->delete();

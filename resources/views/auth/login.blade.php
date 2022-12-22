@@ -52,11 +52,7 @@
             </div>
         </form>
 
-        @if (Route::has('password.request'))
-            <p class="mb-1">
-                <a href="{{ route('password.request', app()->getLocale()) }}">{{ __('Forgot Your Password?') }}</a>
-            </p>
-        @endif
+
     </div>
     <!-- /.login-card-body -->
 @endsection

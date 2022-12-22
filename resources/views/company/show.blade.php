@@ -40,7 +40,7 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <a href="{{route('company.edit',[app()->getLocale(),"$company->id"])}}" type="button" class="btn btn-secondary mt-2">{{__('menu.edit')}}</a>
+                            <a href="{{ route('company.edit',[app()->getLocale(),$company->id]) }}" type="button" class="btn btn-secondary mt-2">{{__('menu.edit')}}</a>
                         </div>
                     </div>
                 </div>

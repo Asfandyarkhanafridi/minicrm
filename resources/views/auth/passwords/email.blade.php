@@ -10,7 +10,7 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('password.email') }}">
+        <form method="POST" action="{{ route('password.email', app()->getLocale()) }}">
             @csrf
 
             <div class="input-group mb-3">
@@ -30,8 +30,7 @@
 
             <div class="row">
                 <div class="col-12">
-                    <button type="submit"
-                            class="btn btn-primary btn-block">{{ __('Send Password Reset Link') }}</button>
+                    <button type="submit" class="btn btn-primary btn-block">{{ __('Send Password Reset Link') }}</button>
                 </div>
                 <!-- /.col -->
             </div>

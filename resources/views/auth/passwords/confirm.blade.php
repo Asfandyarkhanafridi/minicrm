@@ -4,7 +4,7 @@
     <div class="card-body login-card-body">
         <p class="login-box-msg">{{ __('Please confirm your password before continuing.') }}</p>
 
-        <form method="POST" action="{{ route('password.confirm') }}">
+        <form method="POST" action="{{ route('password.confirm', app()->getLocale()) }}">
             @csrf
 
             <div class="input-group mb-3">
@@ -29,9 +29,9 @@
                 </div>
             </div>
         </form>
-        @if (Route::has('password.request'))
+        @if (Route::has('password.request', app()->getLocale()))
             <p class="mb-1">
-                <a href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }}</a>
+                <a href="{{ route('password.request', app()->getLocale()) }}">{{ __('Forgot Your Password?') }}</a>
             </p>
         @endif
     </div>

@@ -4,7 +4,7 @@
     <div class="card-body login-card-body">
         <p class="login-box-msg">{{ __('Reset Password') }}</p>
 
-        <form method="POST" action="{{ route('password.update') }}">
+        <form method="POST" action="{{ route('password.update', app()->getLocale()) }}">
             @csrf
 
             <input type="hidden" name="token" value="{{ $token }}">

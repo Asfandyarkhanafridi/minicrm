@@ -37,10 +37,12 @@
             </li>
         </ul>
         <!-- Right navbar links -->
-        <a href="{{route(Route::currentRouteName(),'en')}}" class="btn btn-sm btn-success ml-auto">English</a>
-        <a href="{{route(Route::currentRouteName(),'urdu')}}" class="btn btn-sm btn-primary ml-2">Urdu</a>
 
-        <form method="POST" action="{{ route('logout', app()->getLocale()) }}" class="ml-2">
+        <!-- Buttons For Changing Languages -->
+{{--        <a href="{{route(Route::currentRouteName(),['en','1'])}}" class="btn btn-sm btn-success ml-auto">English</a>--}}
+{{--        <a href="{{route(Route::currentRouteName(),['urdu','1'])}}" class="btn btn-sm btn-primary ml-2">Urdu</a>--}}
+
+        <form method="POST" action="{{ route('logout', app()->getLocale()) }}" class="ml-auto">
             @csrf
             <a href="{{ route('logout', app()->getLocale()) }}" class="btn btn-sm btn-outline-danger"
                onclick="event.preventDefault(); this.closest('form').submit();">

@@ -88,6 +88,6 @@ class EmployeeController extends Controller
     public function destroy($lang, Employee $employee)
     {
         $employee->delete();
-        return redirect()->route('employee.index')->with('errorMessage','Employee Deleted');
+        return redirect()->route('employee.index',app()->getLocale())->with('errorMessage','Employee Deleted');
     }
 }

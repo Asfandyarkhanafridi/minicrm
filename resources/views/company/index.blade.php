@@ -9,7 +9,7 @@
                     <h1 class="m-0">{{ __('menu.companies') }}</h1>
                 </div>
                 <div style="position: absolute; right: 1%">
-                    <a href="{{route('company.create', app()->getLocale())}}" class="btn btn-primary">{{__('menu.createCompany')}}</a>
+                    <a href="{{ route('company.create', app()->getLocale()) }}" class="btn btn-primary">{{__('menu.createCompany')}}</a>
                 </div>
                 <!-- /.col -->
             </div><!-- /.row -->

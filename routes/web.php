@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::redirect('/','/en');
 Route::group(['prefix'=>'{language}'], function (){
     Route::get('/', function () {
-        return redirect()->route('login',['locale' => 'en']);
+        return redirect()->route('login');
     });
 
     Auth::routes();
